@@ -1,10 +1,5 @@
 /**
  *	@file 	HomingBullet.h
- *	@brief	w’è‚µ‚½À•W‚É—U“±’e
- *	@author	yuto uchida
- *	@data   2011-01-25
- *	@note
- *
  */
 #ifndef _HOMINGBULLET_H__
 #define _HOMINGBULLET_H__
@@ -26,32 +21,32 @@ public:
     void SetShotFlg(const bool in_Flg) { mb_shot = in_Flg; }
 
     /*
-            @brief	‘Å‚ÂŠp“x
-            @param	Šp“xw’è
+            @brief	ï¿½Å‚ÂŠpï¿½x
+            @param	ï¿½pï¿½xï¿½wï¿½ï¿½
     */
     void setBulletAngle(float i_angle);
 
     /*
-            @brief	ƒz[ƒ~ƒ“ƒO‘ÎÛ‚ÌÀ•Ww’è
-            @param	ia_target_pos	:	‘ÎÛÀ•W
+            @brief	ï¿½zï¿½[ï¿½~ï¿½ï¿½ï¿½Oï¿½ÎÛ‚Ìï¿½ï¿½Wï¿½wï¿½ï¿½
+            @param	ia_target_pos	:	ï¿½ÎÛï¿½ï¿½W
     */
     void setTargetPos(const D3DXVECTOR3& i_target_pos);
     /*
-            @brief	’e‚ğŒ‚‚Â
-            @param	i_spos	:	’e‚Ì‰ŠúÀ•W
+            @brief	ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            @param	i_spos	:	ï¿½eï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½W
     */
     void shot(const D3DXVECTOR3& i_spos);
 
     /*
-            @brief	Œğ·”»’è
-            @param	i_cpos		:	ƒIƒuƒWƒFƒNƒg‚Ì’†SÀ•W
-            @param	i_size_x	:	‰¡ƒTƒCƒY
-            @param	i_size_y	:	cƒTƒCƒY
-            @return	Õ“Ë[true]	/	”ñÕ“Ë[false]
+            @brief	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            @param	i_cpos		:	ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’ï¿½ï¿½Sï¿½ï¿½ï¿½W
+            @param	i_size_x	:	ï¿½ï¿½ï¿½Tï¿½Cï¿½Y
+            @param	i_size_y	:	ï¿½cï¿½Tï¿½Cï¿½Y
+            @return	ï¿½Õ“ï¿½[true]	/	ï¿½ï¿½Õ“ï¿½[false]
     */
     bool isIntersected(const D3DXVECTOR3& i_cpos, float i_size_x, float i_size_y);
 
-    //	ƒfƒoƒbƒOİ’è—p
+    //	ï¿½fï¿½oï¿½bï¿½Oï¿½İ’ï¿½p
     static void setDebug(int in_DebugSceneHandle);
 
 private:

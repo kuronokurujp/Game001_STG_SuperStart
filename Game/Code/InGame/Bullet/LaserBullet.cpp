@@ -1,10 +1,4 @@
 /**
- *	@file 	D:/ProgramStady/Game/bom_panic/source/title/shot_sample/src/LaserBullet.cpp
- *	@brief
- *	@author	yuto uchida
- *	@data   2011-01-25
- *	@note
- *
  */
 #include "LaserBullet.h"
 
@@ -14,7 +8,7 @@
 #include "tips/Collsion.h"
 #include "tips/Primitive.h"
 
-// ƒŒ[ƒU[‚ÌƒTƒCƒY
+// ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½ÌƒTï¿½Cï¿½Y
 const float gc_size       = 32.0f;
 const float gc_add_length = 10.0f;
 
@@ -28,7 +22,7 @@ C_LaserBullet::~C_LaserBullet()
 
 void C_LaserBullet::init()
 {
-    // ‰Šú‰»
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     m_length = 0;
     mb_shot  = false;
 }
@@ -39,7 +33,7 @@ void C_LaserBullet::update()
 {
     if (mb_shot == false)
     {
-        // ƒŒ[ƒU‚ªŽc‚Á‚Ä‚¢‚é‚È‚çªŒ³‚©‚çÁ‚µ‚Ä‚¢‚­
+        // ï¿½ï¿½ï¿½[ï¿½Uï¿½ï¿½ï¿½cï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½È‚çªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
         if (m_length > 0.f)
         {
             m_length -= gc_add_length;
@@ -73,19 +67,19 @@ void C_LaserBullet::draw() const
     PRIMITIVE_VERTEX_COLOR_ST aVertex[4];
     D3DXVECTOR3 vec_pnt[4];
 
-    // ’†SÀ•W‚©‚ç4“_‚ð‹‚ß‚é
-    // ¦	‚±‚±‚Ì’¸“_À•WŒn‚Í‚R‚cÀ•WŒn‚Æl‚¦‚é
-    //		ƒfƒJƒ‹ƒgÀ•WŒn‚Å‚Í‚È‚¢
-    // ‰Eã
+    // ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½4ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+    // ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½Wï¿½nï¿½Í‚Rï¿½cï¿½ï¿½ï¿½Wï¿½nï¿½Ælï¿½ï¿½ï¿½ï¿½
+    //		ï¿½fï¿½Jï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Wï¿½nï¿½Å‚Í‚È‚ï¿½
+    // ï¿½Eï¿½ï¿½
     vec_pnt[0] = D3DXVECTOR3(m_length, gc_size, 0.f);
-    // ¶ã
+    // ï¿½ï¿½ï¿½ï¿½
     vec_pnt[1] = D3DXVECTOR3(0.f, gc_size, 0.f);
-    // ‰E‰º
+    // ï¿½Eï¿½ï¿½
     vec_pnt[2] = D3DXVECTOR3(m_length, -gc_size, 0.f);
-    // ¶‰º
+    // ï¿½ï¿½ï¿½ï¿½
     vec_pnt[3] = D3DXVECTOR3(0.f, -gc_size, 0.f);
 
-    // ƒXƒNƒŠ[ƒ“À•W‚É•ÏŠ·
+    // ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½É•ÏŠï¿½
     for (int i = 0; i < 4; ++i)
     {
         D3DXVECTOR3 tmp = vec_pnt[i];
@@ -97,13 +91,13 @@ void C_LaserBullet::draw() const
         aVertex[i].Color = D3DCOLOR_ARGB(255, 255, 255, 255);
     }
 
-    //	•`‰æ
+    //	ï¿½`ï¿½ï¿½
     DrawPrimitive2DSVertexQuad(aVertex);
 }
 
 /*
-        @brief	‘Å‚ÂŠp“x
-        @param	Šp“xŽw’è
+        @brief	ï¿½Å‚ÂŠpï¿½x
+        @param	ï¿½pï¿½xï¿½wï¿½ï¿½
 */
 void C_LaserBullet::setBulletAngle(float i_angle)
 {
@@ -119,10 +113,10 @@ bool C_LaserBullet::isIntersected(const D3DXVECTOR3& i_cpos, float i_size_x, flo
         return false;
     }
 
-    //	Õ“Ë”»’è
+    //	ï¿½Õ“Ë”ï¿½ï¿½ï¿½
     INTERSECT_RECT2D_DATA_ST chr01(i_cpos.x, i_cpos.y, i_size_x, i_size_y);
 
-    //	ƒŒ[ƒU[‚Ìü‚Ì’†SˆÊ’u‚Ö
+    //	ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½Ìï¿½ï¿½Ì’ï¿½ï¿½Sï¿½Ê’uï¿½ï¿½
     INTERSECT_RECT2D_DATA_ST chr02(m_pos.x + m_length / 2.f, m_pos.y, m_length, gc_size);
     return isIntersectedRect2D(chr01, chr02);
 }

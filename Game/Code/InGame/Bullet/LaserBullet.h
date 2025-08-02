@@ -1,10 +1,4 @@
 /**
- *	@file 	D:/ProgramStady/Game/bom_panic/source/title/shot_sample/src/LaserBullet.h
- *	@brief	ˆê–{‚Ì‘¾‚¢ƒŒ[ƒU‚ğ‰E‚©‚ç”­Ë
- *	@author	yuto uchida
- *	@data   2011-01-25
- *	@note
- *
  */
 #ifndef __LASERBULLET_H__
 #define __LASERBULLET_H__
@@ -24,31 +18,31 @@ public:
     void draw() const;
 
     /*
-            @brief	‘Å‚ÂŠp“x
-            @param	Šp“xw’è
+            @brief	ï¿½Å‚ÂŠpï¿½x
+            @param	ï¿½pï¿½xï¿½wï¿½ï¿½
     */
     void setBulletAngle(float i_angle);
 
     /*
-            @brief	’e‚ğŒ‚‚Â
-            @param	i_spos	:	’e‚Ì‰ŠúÀ•W
+            @brief	ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            @param	i_spos	:	ï¿½eï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½W
     */
     void shot(const D3DXVECTOR3& i_spos);
 
     /*
-            @brief	Œğ·”»’è
-            @param	i_cpos		:	ƒIƒuƒWƒFƒNƒg‚Ì’†SÀ•W
-            @param	i_size_x	:	‰¡ƒTƒCƒY
-            @param	i_size_y	:	cƒTƒCƒY
-            @return	Õ“Ë[true]	/	”ñÕ“Ë[false]
+            @brief	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            @param	i_cpos		:	ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’ï¿½ï¿½Sï¿½ï¿½ï¿½W
+            @param	i_size_x	:	ï¿½ï¿½ï¿½Tï¿½Cï¿½Y
+            @param	i_size_y	:	ï¿½cï¿½Tï¿½Cï¿½Y
+            @return	ï¿½Õ“ï¿½[true]	/	ï¿½ï¿½Õ“ï¿½[false]
     */
     bool isIntersected(const D3DXVECTOR3& i_cpos, float i_size_x, float i_size_y);
 
 private:
-    // n“_‚ÌÀ•W
+    // ï¿½nï¿½_ï¿½Ìï¿½ï¿½W
     D3DXVECTOR3 m_pos;
     D3DXVECTOR3 m_dir;
-    // ƒŒ[ƒU[‚Ì’·‚³
+    // ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½Ì’ï¿½ï¿½ï¿½
     float m_length;
     bool mb_shot;
 };

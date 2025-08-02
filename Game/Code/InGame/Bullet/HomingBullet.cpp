@@ -1,11 +1,5 @@
 /**
  *	@file 	HomingBullet.h
- *	@brief	Žw’è‚µ‚½À•W‚É—U“±’e
- *	@author	yuto uchida
- *	@data   2011-01-25
- *	@note 	20120130	ƒz[ƒ~ƒ“ƒOƒŒ[ƒU[‚ªŠ®¬‚µ‚½‚ªƒŒ[ƒU[‚Ì’·‚³‚ÌŽw’è‚ª‚Å‚«‚È‚¢
- *						Œã‚ÉC³‚·‚é
- *
  */
 #include "HomingBullet.h"
 
@@ -69,19 +63,19 @@ void C_HomingBullet::update()
     D3DXVECTOR3 pos = mp_tree_pos[0];
     D3DXVECTOR3 dir = m_dir;
 
-    // ƒ^[ƒQƒbƒg•ûŒü‚É”ò‚Ô
+    // ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½É”ï¿½ï¿½
     if (m_bHoming == true)
     {
         D3DXVECTOR3 vec = m_target_pos - pos;
         D3DXVec3Normalize(&vec, &vec);
-        // “ñ‚Â‚ÌƒxƒNƒgƒ‹Šp“xŽZo
+        // ï¿½ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½pï¿½xï¿½Zï¿½o
         float dot    = D3DXVec3Dot(&dir, &vec);
         float length = D3DXVec3Length(&dir);
         float cosne  = dot / length;
         float sita   = acos(cosne) * 180.f / 3.14f;
         if (sita > gc_turn_limit)
         {
-            // ƒXƒNƒŠ[ƒ“À•W‚ÌŠp“x‚É‡‚í‚¹‚é
+            // ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ÌŠpï¿½xï¿½Éï¿½ï¿½í‚¹ï¿½ï¿½
             float target_sita = atan2f(m_target_pos.y - pos.y, m_target_pos.x - pos.x);
             target_sita       = target_sita * 180.f / 3.14f;
             float dir_sita    = atan2f(dir.y, dir.x) * 180.f / 3.14f;
@@ -101,7 +95,7 @@ void C_HomingBullet::update()
         }
     }
 
-    // ƒIƒuƒWƒFƒNƒgƒcƒŠ[À•WXV
+    // ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Wï¿½Xï¿½V
     for (unsigned i = gc_tree_pos_max - 1; i > 0; --i)
     {
         mp_tree_pos[i] = mp_tree_pos[i - 1];
@@ -111,7 +105,7 @@ void C_HomingBullet::update()
     mp_tree_pos[0] = pos;
     m_dir          = dir;
 
-    // ‘ÎÛƒIƒuƒWƒFƒNƒg‚Æ‚Ì‹——£‚ðƒ`ƒFƒbƒN‚·‚é
+    // ï¿½ÎÛƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Æ‚Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½
     D3DXVECTOR3 chk_vec = pos - m_target_pos;
     if (gc_speed >= D3DXVec3Length(&chk_vec))
     {
@@ -119,8 +113,8 @@ void C_HomingBullet::update()
     }
 #endif
 
-    // ƒŒ[ƒU[‚ª‰æ–ÊŠQ‚É‚¢‚é‚È‚çíœ
-    //	‰æ–ÊŠO‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN
+    // ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½ï¿½ï¿½ï¿½ÊŠQï¿½É‚ï¿½ï¿½ï¿½È‚ï¿½íœ
+    //	ï¿½ï¿½ÊŠOï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½N
     INTERSECT_RECT2D_DATA_ST rect(mp_tree_pos[0].x, mp_tree_pos[0].y, gc_size, gc_size);
     if (IsScreenOutScreen2D(rect) == true)
     {
@@ -138,27 +132,27 @@ void C_HomingBullet::draw() const
     device->SetVertexShader(NULL);
     device->SetFVF(D3DFVF_XYZRHW);
 
-    // ˜AŒ‹‚µ‚½ƒIƒuƒWƒFƒNƒg•`‰æ
+    // ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½`ï¿½ï¿½
     D3DXVECTOR3 vertex[gc_tree_pos_max * 2];
     unsigned vertex_max = sizeof(vertex) / sizeof(vertex[0]);
-    // •`‰æ‚·‚éŽOŠpŒ`‚Ì”
-    // ŽOŠpŒ`‚Í3“_‚Åˆê‚Â‚Æ‚È‚éB
-    // ‚µ‚©‚µ‚»‚ê‚ÍÅ‰‚Ì3“_‚Å‚ ‚Æ‚Í1“_‚ð‰Á‚¦‚é‚²‚Æ‚É
-    // ŽOŠpŒ`‚ªˆê‚Â‘‚¦‚é
-    // ƒXƒgƒŠƒbƒv‚Ì«Ž¿
+    // ï¿½`ï¿½æ‚·ï¿½ï¿½Oï¿½pï¿½`ï¿½Ìï¿½
+    // ï¿½Oï¿½pï¿½`ï¿½ï¿½3ï¿½_ï¿½Åˆï¿½Â‚Æ‚È‚ï¿½B
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍÅï¿½ï¿½ï¿½3ï¿½_ï¿½Å‚ï¿½ï¿½Æ‚ï¿½1ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚²ï¿½Æ‚ï¿½
+    // ï¿½Oï¿½pï¿½`ï¿½ï¿½ï¿½ï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½Xï¿½gï¿½ï¿½ï¿½bï¿½vï¿½Ìï¿½ï¿½ï¿½
     int primitive_max = (gc_tree_pos_max - 2) * 2 + 2;
     ASSERT(primitive_max > 0);
     D3DXVECTOR3 line_vec(0.f, 0.f, 0.f);
     for (unsigned tree_idx = 0; tree_idx < gc_tree_pos_max; ++tree_idx)
     {
-        // Še“_‚Ì’¸“_‚ðÝ’è
+        // ï¿½eï¿½_ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½Ý’ï¿½
         if (tree_idx < (gc_tree_pos_max - 1))
         {
             ASSERT((tree_idx + 1) < gc_tree_pos_max);
             D3DXVECTOR3 vec = mp_tree_pos[tree_idx] - mp_tree_pos[tree_idx + 1];
             D3DXVec3Normalize(&vec, &vec);
 
-            // ’¼s‚·‚éƒxƒNƒgƒ‹‚ðì¬
+            // ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬
             D3DXVECTOR3 tmp = vec;
             line_vec.x      = tmp.y;
             line_vec.y      = -tmp.x;
@@ -177,16 +171,16 @@ void C_HomingBullet::draw() const
 }
 
 /*
-        @brief	ƒz[ƒ~ƒ“ƒO‘ÎÛ‚ÌÀ•WŽw’è
-        @param	i_target_pos	:	‘ÎÛÀ•W
+        @brief	ï¿½zï¿½[ï¿½~ï¿½ï¿½ï¿½Oï¿½ÎÛ‚Ìï¿½ï¿½Wï¿½wï¿½ï¿½
+        @param	i_target_pos	:	ï¿½ÎÛï¿½ï¿½W
 */
 void C_HomingBullet::setTargetPos(const D3DXVECTOR3& i_target_pos)
 {
     m_target_pos = i_target_pos;
 }
 /*
-        @brief	‘Å‚ÂŠp“x
-        @param	Šp“xŽw’è
+        @brief	ï¿½Å‚ÂŠpï¿½x
+        @param	ï¿½pï¿½xï¿½wï¿½ï¿½
 */
 void C_HomingBullet::setBulletAngle(float i_angle)
 {
@@ -196,8 +190,8 @@ void C_HomingBullet::setBulletAngle(float i_angle)
 }
 
 /*
-        @brief	’e‚ðŒ‚‚Â
-        @param	i_spos	:	’e‚Ì‰ŠúÀ•W
+        @brief	ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        @param	i_spos	:	ï¿½eï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½W
 */
 void C_HomingBullet::shot(const D3DXVECTOR3& i_spos)
 {
@@ -216,11 +210,11 @@ void C_HomingBullet::shot(const D3DXVECTOR3& i_spos)
 }
 
 /*
-        @brief	Œð·”»’è
-        @param	i_cpos		:	ƒIƒuƒWƒFƒNƒg‚Ì’†SÀ•W
-        @param	i_size_x	:	‰¡ƒTƒCƒY
-        @param	i_size_y	:	cƒTƒCƒY
-        @return	Õ“Ë[true]	/	”ñÕ“Ë[false]
+        @brief	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        @param	i_cpos		:	ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’ï¿½ï¿½Sï¿½ï¿½ï¿½W
+        @param	i_size_x	:	ï¿½ï¿½ï¿½Tï¿½Cï¿½Y
+        @param	i_size_y	:	ï¿½cï¿½Tï¿½Cï¿½Y
+        @return	ï¿½Õ“ï¿½[true]	/	ï¿½ï¿½Õ“ï¿½[false]
 */
 bool C_HomingBullet::isIntersected(const D3DXVECTOR3& i_cpos, float i_size_x, float i_size_y)
 {
@@ -238,10 +232,10 @@ bool C_HomingBullet::isIntersected(const D3DXVECTOR3& i_cpos, float i_size_x, fl
     return false;
 }
 
-//	ƒfƒoƒbƒOÝ’è—p
+//	ï¿½fï¿½oï¿½bï¿½Oï¿½Ý’ï¿½p
 void C_HomingBullet::setDebug(int in_DebugSceneHandle)
 {
-    //	ƒr[ƒ€‚Ì‘¾‚³
+    //	ï¿½rï¿½[ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½
     DBG_SCENE_FLOAT_ITEM_INPUT(in_DebugSceneHandle, "HomingSize", &gc_size, 16.f, 16.f, 30.f, 1.0f);
     DBG_SCENE_FLOAT_ITEM_INPUT(in_DebugSceneHandle, "Speed", &gc_speed, 10.f, 10.f, 30.f, 0.1f);
     DBG_SCENE_FLOAT_ITEM_INPUT(in_DebugSceneHandle, "TurnSpeed", &gc_turn_speed, 10.f, 0.f, 30.f,
