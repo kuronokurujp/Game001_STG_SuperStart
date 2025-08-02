@@ -1,0 +1,80 @@
+set(PLUGIN_LUA_NAME HobbyPlugin_Lua)
+set(PLUGIN_LUA_INC_DIR ${CMAKE_CURRENT_LIST_DIR}/Inc)
+set(PLUGIN_LUA_THIRD_PARTY_DIR ${CMAKE_CURRENT_LIST_DIR}/ThirdParty/lua/src)
+
+set(PLUGIN_LUA_TARGET_COMMON_FILES
+    .editorconfig
+    LICENSE.txt
+    README.md
+    ThirdPartyNotices.txt
+)
+
+set(PLUGIN_LUA_TARGET_INC_FILES
+    Inc/LuaModule.h
+)
+
+set(PLUGIN_LUA_TARGET_SRC_FILES
+    Src/LuaModule.cpp
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lapi.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lauxlib.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lcode.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lctype.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ldebug.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ldo.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lfunc.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lgc.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ljumptab.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/llex.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/llimits.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lmem.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lobject.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lopcodes.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lopnames.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lparser.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lprefix.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lstate.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lstring.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ltable.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ltm.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lua.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lua.hpp
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/luaconf.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lualib.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lundump.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lvm.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lzio.h
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lapi.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lauxlib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lbaselib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lcode.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lcorolib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lctype.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ldebug.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ldo.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ldump.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lfunc.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lgc.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/linit.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/liolib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/llex.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lmathlib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lmem.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/loadlib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lobject.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lopcodes.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/loslib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lparser.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lstate.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lstring.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lstrlib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ltable.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ltablib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ltm.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lua.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/luac.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lundump.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lutf8lib.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lvm.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/lzio.c
+    ${PLUGIN_LUA_THIRD_PARTY_DIR}/ldblib.c
+)

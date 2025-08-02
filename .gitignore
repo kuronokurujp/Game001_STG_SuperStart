@@ -414,4 +414,6 @@ VcPkg/
 vcpkg-configuration.json
 vcpkg.json
 Sample/*
+# vscodeの環境設定は除外
+.vscode/*
 

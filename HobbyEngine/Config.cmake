@@ -1,0 +1,100 @@
+set(ENGINE_NAME HobbyEngine)
+set(ENGINE_INC_DIR ${CMAKE_CURRENT_LIST_DIR}/Inc)
+
+# プロジェクトに登録するファイル群
+set(ENGINE_TARGET_COMMON_FILES
+    .editorconfig
+    LICENSE.txt
+    README.md
+    ThirdPartyNotices.txt
+)
+
+# プロジェクトに登録するソースファイル群
+set(ENGINE_TARGET_SRC_FILES
+    Src/Engine.cpp
+    Src/ApplicationFramework.cpp
+    Src/Common/CustomString.cpp
+    Src/Common/Handle.cpp
+    Src/Common/RTTI.cpp
+    Src/Common/Hash.cpp
+    Src/Common/UUID.cpp
+    Src/File/Path.cpp
+    Src/Math/Math.cpp
+    Src/Math/Matrix3.cpp
+    Src/Math/Matrix4.cpp
+    Src/Math/Quaternion.cpp
+    Src/Math/Rect2.cpp
+    Src/Math/Vector2.cpp
+    Src/Math/Vector3.cpp
+    Src/Memory/Memory.cpp
+    Src/Memory/MemoryManager.cpp
+    Src/Task/Task.cpp
+    Src/Task/TaskTree.cpp
+    Src/Task/TaskManager.cpp
+    Src/Time/FPS.cpp
+    Src/Module/Module.cpp
+    Src/Platform/PlatformModule.cpp
+    Src/Platform/PlatformInput.cpp
+    Src/Platform/PlatformGraphic.cpp
+    Src/Platform/Graphic/FrameBase.cpp
+    Src/Platform/Graphic/FrameConfig.cpp
+    Src/AsyncTask/AsyncTask.cpp
+    Src/AsyncTask/AsyncTaskManager.cpp
+)
+
+# プロジェクトに登録するインクルードファイル群
+set(ENGINE_TARGET_INC_FILES
+    Inc/Engine/Math/Matrix3.h
+    Inc/Engine/Math/Matrix4.h
+    Inc/Engine/ApplicationFramework.h
+    Inc/Engine/Engine.h
+    Inc/Engine/MiniEngine.h
+    Inc/Engine/Config.h
+    Inc/Engine/Core.h
+    Inc/Engine/Generated.h
+    Inc/Engine/Macro.h
+    Inc/Engine/Str.h
+    Inc/Engine/Type.h
+    Inc/Engine/Common/CustomArray.h
+    Inc/Engine/Common/CustomVector.h
+    Inc/Engine/Common/CustomList.h
+    Inc/Engine/Common/CustomStack.h
+    Inc/Engine/Common/CustomMap.h
+    Inc/Engine/Common/CustomString.h
+    Inc/Engine/Common/Handle.h
+    Inc/Engine/Common/PoolManager.h
+    Inc/Engine/Common/RTTI.h
+    Inc/Engine/Common/Singleton.h
+    Inc/Engine/Common/Hash.h
+    Inc/Engine/Common/UUID.h
+    Inc/Engine/Common/Function.h
+    Inc/Engine/File/Path.h
+    Inc/Engine/Math/Color.h
+    Inc/Engine/Math/Math.h
+    Inc/Engine/Math/Quaternion.h
+    Inc/Engine/Math/Rect2.h
+    Inc/Engine/Math/Vector2.h
+    Inc/Engine/Math/Vector3.h
+    Inc/Engine/Math/Vector4.h
+    Inc/Engine/Math/MathCore.h
+    Inc/Engine/Memory/Memory.h
+    Inc/Engine/Memory/MemoryManager.h
+    Inc/Engine/Task/Task.h
+    Inc/Engine/Task/TaskTree.h
+    Inc/Engine/Task/TaskManager.h
+    Inc/Engine/Time/FPS.h
+    Inc/Engine/Module/Module.h
+    Inc/Engine/Platform/PlatformFile.h
+    Inc/Engine/Platform/PlatformFont.h
+    Inc/Engine/Platform/PlatformInput.h
+    Inc/Engine/Platform/PlatformGraphic.h
+    Inc/Engine/Platform/Graphic/FrameBase.h
+    Inc/Engine/Platform/Graphic/FrameEvent.h
+    Inc/Engine/Platform/Graphic/FrameConfig.h
+    Inc/Engine/Platform/Graphic/Drawable.h
+    Inc/Engine/Platform/PlatformSystem.h
+    Inc/Engine/Platform/PlatformTime.h
+    Inc/Engine/Platform/PlatformModule.h
+    Inc/Engine/AsyncTask/AsyncTask.h
+    Inc/Engine/AsyncTask/AsyncTaskManager.h
+)

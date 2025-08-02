@@ -1,0 +1,16 @@
+set(PLUGIN_RENDER_NAME HobbyPlugin_Render)
+set(PLUGIN_RENDER_INC_DIR ${CMAKE_CURRENT_LIST_DIR}/Inc)
+
+set(PLUGIN_RENDER_TARGET_COMMON_FILES
+    .editorconfig
+    LICENSE.txt
+    README.md
+)
+
+set(PLUGIN_RENDER_TARGET_INC_FILES
+    Inc/RenderModule.h
+)
+
+set(PLUGIN_RENDER_TARGET_SRC_FILES
+    Src/RenderModule.cpp
+)
