@@ -1,0 +1,6 @@
+set(PLUGIN___MODULE_UPPER_NAME___TEST_NAME HobbyPlugin___MODULE_NAME___UnitTests)
+
+# テストソースをまとめる（複数ファイルがあればここに追加）
+set(PLUGIN___MODULE_UPPER_NAME___TARGET_TEST_SRC_FILES
+    __MODULE_NAME__/Test__MODULE_NAME__.cpp
+)

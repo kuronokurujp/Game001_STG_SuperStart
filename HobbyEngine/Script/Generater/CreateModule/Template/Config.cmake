@@ -1,12 +1,19 @@
-set(__MODULE_UPPER_NAME___PLUGIN_NAME HobbyEnginePlugin___MODULE_NAME__)
+set(PLUGIN___MODULE_UPPER_NAME___NAME HobbyEnginePlugin___MODULE_NAME__)
+set(PLUGIN___MODULE_UPPER_NAME___INC_DIR ${CMAKE_CURRENT_LIST_DIR}/Inc)
 
 # プロジェクトに登録するファイル群
 # ここに全て記載する
-set(__MODULE_UPPER_NAME___PLUGIN_TARGET_FILES
+set(PLUGIN___MODULE_UPPER_NAME___TARGET_COMMON_FILES
     .editorconfig
     LICENSE.txt
     README.md
 
-    __MODULE_NAME__Module.cpp
-    __MODULE_NAME__Module.h
+)
+
+set(PLUGIN___MODULE_UPPER_NAME___TARGET_INC_FILES
+    Inc/__MODULE_NAME__Module.h
+)
+
+set(PLUGIN___MODULE_UPPER_NAME___TARGET_SRC_FILES
+    Src/__MODULE_NAME__Module.cpp
 )

@@ -38,7 +38,7 @@ for /l %%i in (0,1,25) do (
     set "lower=abcdefghijklmnopqrstuvwxyz"
     set "upper=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     set "char=!INPUT_MODULENAME:~%%i,1!"
-    
+
     REM 文字列の終端に到達した場合ループを終了
     if "!char!" == "" goto done
 
@@ -55,17 +55,22 @@ echo 大文字モジュール名は: !MODULE_UPPER_NAME!
 echo コピーしたモジュールを入力情報に基づいて書き換えます
 set ORG_MODULE_CPP_FILENAME=Module.cpp
 set ORG_MODULE_H_FILENAME=Module.h
+set ORG_MODULE_CPP_TEST_FILENAME=Test.cpp
 set REPLACE_MODULE_CPP_FILENAME=%INPUT_MODULENAME%Module.cpp
 set REPLACE_MODULE_H_FILENAME=%INPUT_MODULENAME%Module.h
+set REPLACE_MODULE_CPP_TEST_FILENAME=Test%INPUT_MODULENAME%.cpp
 
 REM 置換キーワードが記述しているファイル一覧
 set REPLACE_FILES[0]=README.md
-set REPLACE_FILES[1]=%ORG_MODULE_CPP_FILENAME%
-set REPLACE_FILES[2]=%ORG_MODULE_H_FILENAME%
+set "REPLACE_FILES[1]=Src\%ORG_MODULE_CPP_FILENAME%"
+set "REPLACE_FILES[2]=Inc\%ORG_MODULE_H_FILENAME%"
 set REPLACE_FILES[3]=Config.cmake
 set REPLACE_FILES[4]=CMakeLists.txt
+set "REPLACE_FILES[5]=Test\Template\%ORG_MODULE_CPP_TEST_FILENAME%"
+set "REPLACE_FILES[6]=Test\Config.cmake"
+set "REPLACE_FILES[7]=Test\CMakeLists.txt"
 
-set ARRAY_SIZE=5
+set ARRAY_SIZE=7
 
 REM 一時ファイルを作成
 set TEMP_FILE=%TEMP%\replace_temp.txt
@@ -81,7 +86,7 @@ for /L %%i in (0,1,%ARRAY_SIZE%) do (
             set "line=!line:__MODULE_UPPER_NAME__=%MODULE_UPPER_NAME%!"
             echo !line!>> "%TEMP_FILE%"
             endlocal
-        )) 
+        ))
         move /Y "%TEMP_FILE%" "!DEST_MODULEDIR!\!CURRENT_FILE!"
     ) else (
         echo File not found: !CURRENT_FILE!
@@ -89,8 +94,11 @@ for /L %%i in (0,1,%ARRAY_SIZE%) do (
 )
 
 echo モジュールのファイル名を入力した名前に基づいて変える
-rename "%DEST_MODULEDIR%\%ORG_MODULE_CPP_FILENAME%" "%REPLACE_MODULE_CPP_FILENAME%"
-rename "%DEST_MODULEDIR%\%ORG_MODULE_H_FILENAME%" "%REPLACE_MODULE_H_FILENAME%"
+rename "%DEST_MODULEDIR%\Src\%ORG_MODULE_CPP_FILENAME%" "%REPLACE_MODULE_CPP_FILENAME%"
+rename "%DEST_MODULEDIR%\Inc\%ORG_MODULE_H_FILENAME%" "%REPLACE_MODULE_H_FILENAME%"
+rename "%DEST_MODULEDIR%\Test\Template\%ORG_MODULE_CPP_TEST_FILENAME%" "%REPLACE_MODULE_CPP_TEST_FILENAME%"
+echo モジュールのフォルダ名を入力した名前に基づいたのに変える
+rename "%DEST_MODULEDIR%\Test\Template" "%INPUT_MODULENAME%"
 
 echo コピーしたモジュールを指定したフォルダに移動します。
 move "%DEST_MODULEDIR%" "%INPUT_MODULE_DIR_FULLPATH%"

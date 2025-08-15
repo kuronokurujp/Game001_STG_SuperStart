@@ -1,45 +1,38 @@
-# プラグインビルドの共通処理.
-include(${CMAKE_CURRENT_SOURCE_DIR}/../Plugin.cmake NO_POLICY_SCOPE)
-# プラグインの共通情報.
+cmake_minimum_required(VERSION 3.26)
+
+# プロジェクトの共通処理
+include(${CMAKE_SOURCE_DIR}/HobbyEngine/cmake/Project.cmake NO_POLICY_SCOPE)
+# エンジン設定
+include(${CMAKE_SOURCE_DIR}/HobbyEngine/Config.cmake NO_POLICY_SCOPE)
+# プラグインビルドの共通処理
 include(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake NO_POLICY_SCOPE)
 
-# 共有ライブラリとして生成するためのオプションの定義.
-option(__MODULE_UPPER_NAME___PLUGIN_BUILD_SHARED_LIBS "build shared library" OFF)
+message("build ${PLUGIN___MODULE_UPPER_NAME___NAME} plugin lib!")
 
-# プラグイン共通ビルド処理.
-common_build_plugin("${__MODULE_UPPER_NAME___PLUGIN_NAME}" "${__MODULE_UPPER_NAME___PLUGIN_TARGET_FILES}" "$CACHE{CACHE_ENGINE_INCLUDE_CODE}" ${__MODULE_UPPER_NAME___PLUGIN_BUILD_SHARED_LIBS})
+# 静的ライブラリの設定
+project_configure_static_lib_target(${PLUGIN___MODULE_UPPER_NAME___NAME})
 
-# プラグインが利用するパッケージをvcpkgから取得
-vcpkg_install_package($CACHE{CHACHE_VCPKG_ROOT} ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}" $CACHE{CACHE_PROJECT_VCPKG_STATIC_LIB_TYPE})
+# プロジェクトの設定
+project_configure_target(${PLUGIN___MODULE_UPPER_NAME___NAME})
 
-# インストールしたパッケージのディレクトリパス
-set(VCPKG_DIR_PATH ThirdParty/VcPkg/$CACHE{CACHE_PROJECT_VCPKG_STATIC_LIB_TYPE})
+# ターゲットへファイル群の設定
+project_configure_files_target(${PLUGIN___MODULE_UPPER_NAME___NAME}
+    ${PLUGIN___MODULE_UPPER_NAME___TARGET_COMMON_FILES}
+    ${PLUGIN___MODULE_UPPER_NAME___TARGET_SRC_FILES}
+    ${PLUGIN___MODULE_UPPER_NAME___TARGET_INC_FILES}
+)
 
-message("build ${__MODULE_UPPER_NAME___PLUGIN_TARGET_FILES}")
+# エンジンのインクルードパス
+target_include_directories(${PLUGIN___MODULE_UPPER_NAME___NAME} PUBLIC ${ENGINE_INC_DIR})
 
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${VCPKG_DIR_PATH})
-    # vcpkgの取り扱い設定処理
-    # 使う場合はコメントを外して書き換えてください
+# プロジェクトが参照できるインクルードディレクトリのパス
+target_include_directories(${PLUGIN___MODULE_UPPER_NAME___NAME} PUBLIC ${PLUGIN___MODULE_UPPER_NAME___INC_DIR})
 
-    # プラグイン用のパッケージディレクトリを設定
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${VCPKG_DIR_PATH}")
+# 依存ライブラリのリンク
+target_link_libraries(${PLUGIN___MODULE_UPPER_NAME___NAME}
+    PUBLIC
+        ${ENGINE_NAME}
+)
 
-    # SDL2のパッケージを探す
-    # find_package(インストールしたパッケージ名 REQUIRED CONFIG)
-
-    # プラグインをリンク
-    # target_link_libraries(${__MODULE_UPPER_NAME___PLUGIN_NAME}
-    #     PRIVATE
-    #     # SDL2関連のライブラリを設定
-    #     vcpkgのパッケージのライブラリファイルを指定
-    # )
-    # プラグインのインクルード
-    # target_include_directories(${__MODULE_UPPER_NAME___PLUGIN_NAME}
-    #     PRIVATE
-            # ここは書き換えない
-    #         ./${VCPKG_DIR_PATH}/include/
-            # 他にもインクルードしたいディレクトリがあれば追加
-    # )
-else()
-    message(STATUS "Non VcpkgDir ${VCPKG_DIR_PATH}")
-endif()
+# テスト用サブディレクトリを追加
+add_subdirectory(Test)
