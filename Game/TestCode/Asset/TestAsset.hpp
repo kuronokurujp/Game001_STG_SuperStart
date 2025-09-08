@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // ゲームプロジェクトはアプリプロジェクトでコードの実態を入れ込むためにcppファイルもインクルードしないといけない
-#include "../PlatformSDL2/PlatformSDL2Module.h"
+#include "../Platform/PlatformModule.h"
 #include "Code/Asset/ParamaterAssetData.cpp"
 #include "Code/Asset/ParamaterAssetData.h"
 #include "Engine/Common/Function.h"
@@ -9,7 +9,7 @@
 
 TEST_CASE("Test Paramater Asset Load")
 {
-    StartupEngineByUnitTest<AssetManager::AssetManagerModule, PlatformSDL2::PlatformSDL2Module>(
+    StartupEngineByUnitTest<AssetManager::AssetManagerModule, Platform::PlatformModule>(
         []()
         {
             auto pAssetManagerModule =

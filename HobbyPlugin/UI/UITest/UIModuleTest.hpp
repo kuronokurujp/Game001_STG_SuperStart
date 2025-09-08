@@ -4,7 +4,7 @@
 #include "../EnhancedInput/EnhancedInputModule.h"
 #include "../Event/EventModule.h"
 #include "../Localization/LocalizationModule.h"
-#include "../PlatformSDL2/PlatformSDL2Module.h"
+#include "../Platform/PlatformModule.h"
 #include "../Render/RenderModule.h"
 #include "../UI/UIModule.h"
 #include "Engine/Common/Function.h"
@@ -19,7 +19,7 @@ TEST_CASE("UI SimpleTest")
     Core::Common::Handle widget;
     Core::Common::Handle uiEventListenerHash;
 
-    StartupEngineByUnitTest<PlatformSDL2::PlatformSDL2Module, Render::RenderModule, UI::UIModule,
+    StartupEngineByUnitTest<Platform::PlatformModule, Render::RenderModule, UI::UIModule,
                             Event::EventModule, AssetManager::AssetManagerModule,
                             Localization::LocalizationModule, EnhancedInput::EnhancedInputModule>(
         [&uStep, &sceneHandle, &debugWindowHandle, &layoutAssetHandle, &widget,

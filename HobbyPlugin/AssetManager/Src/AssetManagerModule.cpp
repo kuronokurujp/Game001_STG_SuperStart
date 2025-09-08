@@ -1,7 +1,7 @@
 ﻿#include "AssetManagerModule.h"
 
-#include "AssetManager/AssetDataBase.h"
-#include "Engine/Platform/PlatformModule.h"
+// 依存モジュール
+#include "PlatformModule.h"
 
 namespace AssetManager
 {

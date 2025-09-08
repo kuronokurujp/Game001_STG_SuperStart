@@ -3,7 +3,8 @@
 // エンジン最小インクルード
 #include "Engine/Common/CustomMap.h"
 #include "Engine/MiniEngine.h"
-#include "Engine/Platform/PlatformInput.h"
+// 入力処理はプラットフォームに依存
+#include "Platform/Interface/Input.h"
 
 namespace EnhancedInput
 {

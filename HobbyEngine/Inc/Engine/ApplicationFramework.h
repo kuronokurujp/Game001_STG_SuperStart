@@ -2,6 +2,8 @@
 
 #include "Engine/MiniEngine.h"
 
+#include "Engine/Time/FPS.h"
+
 /// <summary>
 /// エンジンをアプリで扱うフレームワーク
 /// </summary>
@@ -44,4 +46,19 @@ protected:
     /// </summary>
     virtual HE::Bool _VRegistEngineModule()   = 0;
     virtual HE::Bool _VUnRegistEngineModule() = 0;
+
+    /// <summary>
+    /// FPSタイマー作成
+    /// </summary>
+    /// <returns></returns>
+    virtual Core::Memory::SharedPtr<Core::Time::FPS> _VCreateFPSTimer() = 0;
+
+    /// <summary>
+    /// アプリを指定したミリ秒スリープ
+    /// </summary>
+    /// <param name="in_uMSec"></param>
+    virtual void _VSleep(const HE::Uint32 in_uMSec) = 0;
+
+private:
+    Core::Memory::SharedPtr<Core::Time::FPS> _spFPS = NULL;
 };

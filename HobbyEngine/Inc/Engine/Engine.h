@@ -58,7 +58,6 @@ public:
 
     // エンジンを稼働させるためのループ用メソッド
     void BeforeUpdateLoop(const HE::Float32);
-    void WaitFrameLoop();
     void MainUpdateLoop(const HE::Float32);
     void LateUpdateLoop(const HE::Float32);
 
@@ -71,13 +70,6 @@ public:
     /// モジュール管理を取得
     /// </summary>
     Module::ModuleManager& ModuleManager() { return *this->_upModuleManager.get(); }
-
-    /// <summary>
-    /// プラットフォームのモジュールを取得
-    /// windows / android / iosなどのプラットフォームが扱える予定
-    /// 現在はwindowsのみ
-    /// </summary>
-    Core::Memory::SharedPtr<Platform::PlatformModule> PlatformModule();
 
     /// <summary>
     /// １フレームの差分時間を秒で取得

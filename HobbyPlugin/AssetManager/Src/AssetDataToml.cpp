@@ -6,7 +6,7 @@
 #include "tomlplusplus/toml.hpp"
 
 // 依存モジュール
-#include "Engine/Platform/PlatformFile.h"
+#include "Platform/Interface/File.h"
 
 namespace AssetManager
 {

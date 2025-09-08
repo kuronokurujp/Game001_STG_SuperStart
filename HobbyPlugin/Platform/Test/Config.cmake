@@ -1,5 +1,5 @@
-set(PLUGIN_PLATFORMSDL2_TEST_NAME HobbyPlugin_Platform_SDL2_UnitTests)
+set(PLUGIN_PLATFORM_TEST_NAME HobbyPlugin_Platform_UnitTests)
 
-set(PLUGIN_PLATFORMSDL2_TARGET_TEST_SRC_FILES
-    PlatformSDL2/TestSDL2.cpp
+set(PLUGIN_PLATFORM_TARGET_TEST_SRC_FILES
+    Platform/TestSDL2.cpp
 )

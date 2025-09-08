@@ -2,7 +2,6 @@
 
 #include "Engine/Memory/Memory.h"
 #include "Engine/Module/Module.h"
-#include "Engine/Platform/PlatformModule.h"
 #include "Engine/Time/FPS.h"
 
 /// <summary>
@@ -80,16 +79,6 @@ HE::Bool Engine::Start()
     // モジュール管理を使えるようにする
     this->_upModuleManager->Start();
 
-    // FPSタイマーを作成
-    // ゲームを固定フレームレートにするため
-    auto pPlatformModule = this->PlatformModule();
-    if (pPlatformModule)
-    {
-        this->_spFPS = HE_MAKE_CUSTOM_SHARED_PTR((Core::Time::FPS), pPlatformModule->Time());
-        // TODO: FPSは固定にして60にいったんしている
-        this->_spFPS->EnableFixedMode(60);
-    }
-
     this->_bStart = TRUE;
 
     // 成功
@@ -131,41 +120,6 @@ void Engine::BeforeUpdateLoop(const HE::Float32 in_fDt)
     this->_upModuleManager->BeforeUpdate(in_fDt);
 }
 
-void Engine::WaitFrameLoop()
-{
-    auto pPlatform = this->PlatformModule();
-    if (pPlatform == NULL) return;
-
-    if (this->_spFPS == NULL) return;
-
-    HE::Uint64 ulBeginMSec = this->_spFPS->GetLastTimeMSec();
-
-    // 固定フレームモード
-    if (this->_spFPS->IsFixedMode())
-    {
-        // 指定したFPSまで待機
-        do
-        {
-            if (this->_spFPS->IsWaitFrameFixedMode(pPlatform->Time()))
-            {
-                // TODO: 待機中は何か処理をした方がいい?
-                pPlatform->Time()->VSleepMSec(1);
-            }
-            else
-            {
-                this->_spFPS->UpdateTime(pPlatform->Time());
-                break;
-            }
-        } while (TRUE);
-    }
-    else
-    {
-        this->_spFPS->UpdateTime(pPlatform->Time());
-    }
-
-    HE::Uint64 ulEndMSec = this->_spFPS->GetLastTimeMSec();
-}
-
 void Engine::MainUpdateLoop(const HE::Float32 in_fDt)
 {
     // モジュール更新
@@ -179,14 +133,6 @@ void Engine::LateUpdateLoop(const HE::Float32 in_fDt)
     HE_ASSERT(this->_upModuleManager);
 
     this->_upModuleManager->LateUpdate(in_fDt);
-
-    // ここでプラットフォームの状態を確認して終了する
-    auto spPlatform = this->PlatformModule();
-    // エンジンを動かすにはプラットフォームが必要
-    if ((spPlatform == NULL) || spPlatform->VIsQuit())
-    {
-        this->Quit();
-    }
 }
 
 HE::Float32 Engine::GetDeltaTimeSec()
@@ -213,12 +159,4 @@ const HE::Bool Engine::IsQuit()
 void Engine::Quit()
 {
     this->_bQuit = TRUE;
-}
-
-Core::Memory::SharedPtr<Platform::PlatformModule> Engine::PlatformModule()
-{
-    HE_ASSERT(this->_upModuleManager);
-
-    Core::Common::FixedString128 szName(Platform::PlatformModule::ModuleName());
-    return HE_SHADER_PTR_CAST(Platform::PlatformModule, this->_upModuleManager->Get(szName.Str()));
 }

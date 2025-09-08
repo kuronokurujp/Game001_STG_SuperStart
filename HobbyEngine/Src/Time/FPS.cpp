@@ -1,27 +1,20 @@
 ﻿#include "Engine/Time/FPS.h"
 
-#include "Engine/Platform/PlatformModule.h"
-
 namespace Core::Time
 {
-    FPS::FPS(Core::Memory::WeakPtr<Platform::TimeInterface> in_wpTimeInterface)
+    FPS::FPS(NowMSecTimerFunction in_timerFunction)
     {
-        auto pTime = in_wpTimeInterface.lock();
-        HE_ASSERT(pTime);
+        this->_timerFunction = in_timerFunction;
 
         // 帰ってくる時間の単位はmsec
-        auto uCurrentTime = pTime->VNowMSec();
+        auto uCurrentTime = this->_timerFunction();
         for (HE::Uint32 i = 0; i < FPS::_uTimeAvgCount; ++i)
             this->_uaPreviousTimeMSec[i] = uCurrentTime;
     }
 
-    HE::Bool FPS::IsWaitFrameFixedMode(
-        Core::Memory::WeakPtr<Platform::TimeInterface> in_wpTimeInterface)
+    HE::Bool FPS::IsWaitFrameFixedMode()
     {
-        auto pTime = in_wpTimeInterface.lock();
-        if (pTime == NULL) return FALSE;
-
-        const HE::Uint64 uNowMSec = pTime->VNowMSec();
+        const HE::Uint64 uNowMSec = this->_timerFunction();
         // Waitタイムより早い場合は待機フラグを返す
         HE::Bool bWait = (uNowMSec - this->_uaPreviousTimeMSec[FPS::_uTimeAvgCount - 1]) <
                          this->GetFrameMSecByFixedMode();
@@ -30,13 +23,11 @@ namespace Core::Time
         return bWait;
     }
 
-    HE::Bool FPS::UpdateTime(Core::Memory::WeakPtr<Platform::TimeInterface> in_wpTimeInterface)
+    HE::Bool FPS::UpdateTime()
     {
         // ミリ秒単位で扱っている
-        auto pTime = in_wpTimeInterface.lock();
-        if (pTime == NULL) return FALSE;
 
-        const HE::Uint64 uNowMSec = pTime->VNowMSec();
+        const HE::Uint64 uNowMSec = this->_timerFunction();
         // 最新の時間と前フレーム前の時間との差
         const HE::Uint64 uFrameTimeMSec = uNowMSec - this->_uaPreviousTimeMSec[0];
 

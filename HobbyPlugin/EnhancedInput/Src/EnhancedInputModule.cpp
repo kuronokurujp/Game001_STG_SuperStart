@@ -4,7 +4,7 @@
 #include "Engine/Memory/Memory.h"
 
 // 依存モジュール
-#include "Engine/Platform/PlatformModule.h"
+#include "PlatformModule.h"
 #include "EventModule.h"
 
 namespace EnhancedInput

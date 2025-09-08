@@ -2,7 +2,7 @@
 
 #define HE_UNIT_TEST_MODE
 #include "../GameDevGUI/GameDevGUIModule.h"
-#include "../PlatformSDL2/PlatformSDL2Module.h"
+#include "../Platform/PlatformModule.h"
 #include "../Render/RenderModule.h"
 #include "Engine/Common/Function.h"
 #include "Engine/Engine.h"
@@ -14,7 +14,7 @@ TEST_CASE("GameDevGUI Test Open / Close")
     Core::Common::Handle sceneHandle;
     Core::Common::Handle debugWindowHandle;
 
-    StartupEngineByUnitTest<PlatformSDL2::PlatformSDL2Module, Render::RenderModule,
+    StartupEngineByUnitTest<Platform::PlatformModule, Render::RenderModule,
                             GameDevGUI::GameDevGUIModule>(
         [&uStep, &sceneHandle, &debugWindowHandle]()
         {

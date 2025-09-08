@@ -13,7 +13,7 @@
 #include "LevelModule.h"
 #include "LocalizationModule.h"
 #include "LuaModule.h"
-#include "PlatformSDL2Module.h"
+#include "PlatformModule.h"
 #include "RenderModule.h"
 #include "UIModule.h"
 
@@ -204,7 +204,7 @@ HE::Bool WinGameMain::_VEnd()
 
 HE::Bool WinGameMain::_VRegistEngineModule()
 {
-    HE_ENGINE.AddModule<PlatformSDL2::PlatformSDL2Module>();
+    HE_ENGINE.AddModule<Platform::PlatformModule>();
     HE_ENGINE.AddModule<Render::RenderModule>();
     HE_ENGINE.AddModule<Actor::ActorModule>();
     HE_ENGINE.AddModule<UI::UIModule>();

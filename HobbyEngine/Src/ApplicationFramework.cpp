@@ -1,6 +1,7 @@
 ﻿#include "Engine/ApplicationFramework.h"
 
 #include "Engine/Engine.h"
+#include "Engine/Time/FPS.h"
 
 HE::Bool ApplicationEngineFramework::Init(const HE::Bool in_bDebug)
 {
@@ -10,14 +11,22 @@ HE::Bool ApplicationEngineFramework::Init(const HE::Bool in_bDebug)
     // TODO: エンジン用の設定ファイルが必要
 
     const HE::Bool bPreInitRet = HE_ENGINE.Init();
-    HE_ASSERT(bPreInitRet && "事前初期化に失敗");
+    HE_ASSERT_RETURN_VALUE(FALSE, bPreInitRet && "事前初期化に失敗");
 
     // モジュール登録
     if (this->_VRegistEngineModule() == FALSE) return FALSE;
 
     const HE::Bool bInitRet = HE_ENGINE.Start();
-    HE_ASSERT(bInitRet && "初期化に失敗");
-    if (bInitRet == FALSE) return FALSE;
+    HE_ASSERT_RETURN_VALUE(FALSE, bInitRet && "初期化に失敗");
+
+    // TODO: FPSタイマーを作成
+    // ゲームを固定フレームレートにするため
+
+    this->_spFPS = this->_VCreateFPSTimer();
+    HE_ASSERT_RETURN_VALUE(FALSE, this->_spFPS && "FPSタイマーの作成に失敗");
+
+    // TODO: FPSは固定にして60にいったんしている
+    this->_spFPS->EnableFixedMode(60);
 
     return TRUE;
 }
@@ -46,7 +55,33 @@ void ApplicationEngineFramework::Running()
         HE_ENGINE.BeforeUpdateLoop(fDelta);
         if (HE_ENGINE.IsQuit()) break;
 
-        HE_ENGINE.WaitFrameLoop();
+        HE::Uint64 ulBeginMSec = this->_spFPS->GetLastTimeMSec();
+
+        // 固定フレームモード
+        if (this->_spFPS->IsFixedMode())
+        {
+            // 指定したFPSまで待機
+            do
+            {
+                if (this->_spFPS->IsWaitFrameFixedMode())
+                {
+                    // TODO: 待機中は何か処理をした方がいい?
+                    this->_VSleep(1);
+                }
+                else
+                {
+                    this->_spFPS->UpdateTime();
+                    break;
+                }
+            } while (HE_ENGINE.IsQuit() == FALSE);
+        }
+        else
+        {
+            this->_spFPS->UpdateTime();
+        }
+
+        HE::Uint64 ulEndMSec = this->_spFPS->GetLastTimeMSec();
+
         if (HE_ENGINE.IsQuit()) break;
 
         HE_ENGINE.MainUpdateLoop(fDelta);

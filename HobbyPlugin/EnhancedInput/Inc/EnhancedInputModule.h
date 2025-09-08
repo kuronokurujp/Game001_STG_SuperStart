@@ -4,7 +4,9 @@
 #include "Engine/Common/CustomVector.h"
 #include "Engine/MiniEngine.h"
 #include "Engine/Module/Module.h"
-#include "Engine/Platform/PlatformInput.h"
+
+// 入力処理はプラットフォームに依存
+#include "Platform/Interface/Input.h"
 
 // モジュールのヘッダーファイルは全てインクルードする
 #include "EnhancedInput/Actor/ActorManagerDecorater.h"
@@ -106,7 +108,8 @@ namespace EnhancedInput
         /// <summary>
         /// 登録アクションの入力検出・格納処理
         /// </summary>
-        void DetectInputActions(Platform::InputObject* pInputObj, EventInputSharedPtr& spEventInput);
+        void DetectInputActions(Platform::InputObject* pInputObj,
+                                EventInputSharedPtr& spEventInput);
 
     protected:
         /// <summary>

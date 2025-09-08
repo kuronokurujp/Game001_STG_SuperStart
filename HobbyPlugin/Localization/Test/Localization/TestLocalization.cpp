@@ -2,7 +2,7 @@
 
 #include "AssetManagerModule.h"
 #include "LocalizationModule.h"
-#include "PlatformSDL2Module.h"
+#include "PlatformModule.h"
 
 namespace Localization
 {
@@ -11,7 +11,7 @@ namespace Localization
         auto spLocalizationModule = HE_MAKE_CUSTOM_SHARED_PTR((Localization::LocalizationModule));
         // ローカライズモジュールを動かすのに必要なモジュールを作る
         auto spAssetManagerModule = HE_MAKE_CUSTOM_SHARED_PTR((AssetManager::AssetManagerModule));
-        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((PlatformSDL2::PlatformSDL2Module));
+        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((Platform::PlatformModule));
 
         Module::ModuleManager moduleManager;
         EXPECT_EQ(moduleManager.AddModule(spLocalizationModule), TRUE);

@@ -12,10 +12,10 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyEngine/cmake/UTF8.cmake NO_POLICY_SCOPE
 
 # ゲームエンジン
 include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyEngine/Config.cmake NO_POLICY_SCOPE)
-# SDL2プラットフォーム
-include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/PlatformSDL2/Config.cmake NO_POLICY_SCOPE)
+# プラットフォーム
+include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/Platform/Config.cmake NO_POLICY_SCOPE)
 # 描画プラグイン
-include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/Render/Config.cmake NO_POLICY_SCOPE)
+# include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/Render/Config.cmake NO_POLICY_SCOPE)
 # アクタープラグイン
 include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/Actor/Config.cmake NO_POLICY_SCOPE)
 # アセット管理プラグイン
@@ -32,6 +32,8 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/EnhancedInput/Config.cmake NO_PO
 include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/Event/Config.cmake NO_POLICY_SCOPE)
 # Luaプラグイン
 include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/Lua/Config.cmake NO_POLICY_SCOPE)
+# RHI(Render Hardware Interface)プラグイン
+include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/RHI/Config.cmake NO_POLICY_SCOPE)
 # TODO: 以下はデバッグのみ利用(リリース版では含めないようにする)
 # ランタイムのDebugプラグイン
 # include(${CMAKE_CURRENT_SOURCE_DIR}/HobbyPlugin/RuntimeDebug/Config.cmake NO_POLICY_SCOPE)
@@ -72,8 +74,8 @@ set(CMAKE_CONFIGURATION_TYPES Debug Release
 # 各プロジェクトを設定
 # TODO: ファイルを構成を大幅に変更で一つ一つ対応
 add_subdirectory(HobbyEngine)
-add_subdirectory(HobbyPlugin/PlatformSDL2)
-add_subdirectory(HobbyPlugin/Render)
+add_subdirectory(HobbyPlugin/Platform)
+# add_subdirectory(HobbyPlugin/Render)
 add_subdirectory(HobbyPlugin/Actor)
 add_subdirectory(HobbyPlugin/AssetManager)
 add_subdirectory(HobbyPlugin/Level)
@@ -82,6 +84,7 @@ add_subdirectory(HobbyPlugin/Localization)
 add_subdirectory(HobbyPlugin/EnhancedInput)
 add_subdirectory(HobbyPlugin/Event)
 add_subdirectory(HobbyPlugin/Lua)
+add_subdirectory(HobbyPlugin/RHI)
 # TODO: 以下のはデバッグのみ利用(リリース版では含めないようにする)
 # add_subdirectory(HobbyPlugin/RuntimeDebug)
 # add_subdirectory(HobbyPlugin/GameDevGUI)

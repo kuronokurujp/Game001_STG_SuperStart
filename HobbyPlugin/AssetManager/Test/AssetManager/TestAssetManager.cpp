@@ -2,7 +2,7 @@
 
 #include "AssetManagerModule.h"
 #include "Engine/Engine.h"
-#include "PlatformSDL2Module.h"
+#include "PlatformModule.h"
 
 namespace AssetManager
 {
@@ -10,7 +10,7 @@ namespace AssetManager
     TEST(AssetManager, TomlFile)
     {
         // TODO: 使うモジュールを作成
-        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((PlatformSDL2::PlatformSDL2Module));
+        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((Platform::PlatformModule));
         auto spAssetManagerModule = HE_MAKE_CUSTOM_SHARED_PTR((AssetManager::AssetManagerModule));
 
         Module::ModuleManager moduleManager;
@@ -72,7 +72,7 @@ namespace AssetManager
     TEST(AssetManager, JsonFile)
     {
         // TODO: 使うモジュールを作成
-        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((PlatformSDL2::PlatformSDL2Module));
+        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((Platform::PlatformModule));
         auto spAssetManagerModule = HE_MAKE_CUSTOM_SHARED_PTR((AssetManager::AssetManagerModule));
 
         Module::ModuleManager moduleManager;
@@ -152,7 +152,7 @@ namespace AssetManager
     TEST(AssetManager, XmlFile)
     {
         // TODO: 使うモジュールを作成
-        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((PlatformSDL2::PlatformSDL2Module));
+        auto spSDL2Module         = HE_MAKE_CUSTOM_SHARED_PTR((Platform::PlatformModule));
         auto spAssetManagerModule = HE_MAKE_CUSTOM_SHARED_PTR((AssetManager::AssetManagerModule));
 
         Module::ModuleManager moduleManager;

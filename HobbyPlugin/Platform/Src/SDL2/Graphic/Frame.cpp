@@ -1,6 +1,6 @@
-﻿#include "PlatformSDL2/Graphic/Frame.h"
+﻿#ifdef HE_USE_SDL2
 
-#include "Engine/Platform/PlatformModule.h"
+#include "Platform/Core/SDL2/Graphic/Frame.h"
 
 // パッケージ
 #include "GL/glew.h"
@@ -10,7 +10,7 @@
 #include "SDL2/SDL_syswm.h"
 #endif
 
-namespace PlatformSDL2
+namespace Platform
 {
     namespace Local
     {
@@ -205,10 +205,18 @@ namespace PlatformSDL2
                     }
                 });
         }
+
+        // GUIコンテキスト作成
+        {
+            Platform::InitDesc rInitDesc{pWindow, rConfig.Width(), rConfig.Height(), FALSE, 3};
+            this->_gui = HE_MAKE_CUSTOM_UNIQUE_PTR((Platform::GUIContext), rInitDesc);
+        }
     }
 
     void Frame::VEnd()
     {
+        HE_SAFE_DELETE_UNIQUE_PTR(this->_gui);
+
         // ウィンドウのメニューを削除
 #ifdef HE_WIN
         if (this->_hMenuBar)
@@ -240,27 +248,15 @@ namespace PlatformSDL2
     {
     }
 
-    void Frame::VDraw(Platform::MapDrawable& in_mDrawable)
+    void Frame::VBeginFrame()
     {
-        auto [pGLContext, pWindow] = this->_context;
+        this->_gui->BeginFrame();
+    }
 
-        // カラーバッファをクリアする
-        ::glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        ::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // 3D描画開始
-        //::glEnable(GL_DEPTH_TEST);
-        //::glDepthFunc(GL_LEQUAL);
-        //::glDepthRange(0.0, 1.0);  // 深度範囲の設定
-        //::glDisable(GL_BLEND);
-        // TODO: 描画イベントを呼ぶ
-        if (this->_upEvent)
-        {
-            this->_upEvent->VDraw(in_mDrawable);
-        }
-
-        // ウィンドウの描画バッファを切り替える
-        SDL_GL_SwapWindow(reinterpret_cast<SDL_Window*>(pWindow));
+    void Frame::VEndFrame()
+    {
+        this->_gui->EndFrame();
+        this->_gui->Present();
     }
 
     void Frame::VSetPos(const HE::Uint32 in_uX, const HE::Uint32 in_uY)
@@ -323,20 +319,17 @@ namespace PlatformSDL2
         return TRUE;
     }
 
-#ifdef HE_USE_SDL2
-
-    void* Frame::VGetWindowBySDL2() const
+    void* Frame::VGetWindow() const
     {
         auto [pGLContext, pWindow] = this->_context;
         return pWindow;
     }
 
-    void* Frame::VGetContentBySDL2() const
+    void* Frame::VGetContent() const
     {
         auto [pGLContext, pWindow] = this->_context;
         return pGLContext;
     }
-#endif
 
     /// <summary>
     /// メニューアイテムを押した
@@ -346,4 +339,5 @@ namespace PlatformSDL2
         auto& rConfig = this->GetConfig();
         this->_eventMenuCallback(in_uID, rConfig);
     }
-}  // namespace PlatformSDL2
+}  // namespace Platform
+#endif

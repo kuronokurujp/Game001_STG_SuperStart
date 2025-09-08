@@ -1,16 +1,16 @@
-﻿#include "PlatformSDL2/Graphic/Drawable2D.h"
+﻿#include "Platform/Graphic/Drawable2D.h"
 
 #include "Engine/Common/PoolManager.h"
-#include "PlatformSDL2/Graphic/Draw/Material.h"
-#include "PlatformSDL2/Graphic/Draw/Mesh.h"
-#include "PlatformSDL2/Graphic/Draw/Texture.h"
-#include "PlatformSDL2/SDL2Font.h"
+#include "Platform/Graphic/Draw/Material.h"
+#include "Platform/Graphic/Draw/Mesh.h"
+#include "Platform/Graphic/Draw/Texture.h"
+#include "Platform/SDL2Font.h"
 
 // SDL2のヘッダーファイル
 #include "GL/glew.h"
 #include "SDL2/SDL.h"
 
-namespace PlatformSDL2
+namespace Platform
 {
     Drawable2D::Drawable2D()
     {
@@ -1002,4 +1002,4 @@ namespace PlatformSDL2
         //        pMat->Disable();
     }
 
-}  // namespace PlatformSDL2
+}  // namespace Platform

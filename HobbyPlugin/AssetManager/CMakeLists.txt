@@ -6,6 +6,8 @@ include(${CMAKE_SOURCE_DIR}/HobbyEngine/cmake/Project.cmake NO_POLICY_SCOPE)
 include(${CMAKE_SOURCE_DIR}/HobbyEngine/Config.cmake NO_POLICY_SCOPE)
 # プラグインビルドの共通処理
 include(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake NO_POLICY_SCOPE)
+# Plaformモジュール設定
+include(${CMAKE_SOURCE_DIR}/HobbyPlugin/Platform/Config.cmake NO_POLICY_SCOPE)
 
 message("build asset manager plugin lib!")
 
@@ -22,11 +24,19 @@ project_configure_files_target(${PLUGIN_ASSET_MANAGER_NAME}
     ${PLUGIN_ASSET_MANAGER_TARGET_INC_FILES}
 )
 
-# エンジンのインクルードパス
-target_include_directories(${PLUGIN_ASSET_MANAGER_NAME} PUBLIC ${ENGINE_INC_DIR})
+# 利用するモジュールのインクルードパス
+target_include_directories(${PLUGIN_ASSET_MANAGER_NAME}
+    PUBLIC
+        ${ENGINE_INC_DIR}
+        ${PLUGIN_PLATFORM_INC_DIR}
+)
 
 # プロジェクトが参照できるインクルードディレクトリのパス
-target_include_directories(${PLUGIN_ASSET_MANAGER_NAME} PUBLIC ${PLUGIN_ASSET_MANAGER_INC_DIR})
+target_include_directories(${PLUGIN_ASSET_MANAGER_NAME}
+    PUBLIC
+        ${PLUGIN_ASSET_MANAGER_INC_DIR}
+        ${PLUGIN_PLATFORM_NAME}
+)
 # プロジェクトのみが参照できるインクルードディレクトリのパス
 target_include_directories(${PLUGIN_ASSET_MANAGER_NAME} PRIVATE ${PLUGIN_ASSET_MANAGER_THIRD_PARTY_DIR})
 

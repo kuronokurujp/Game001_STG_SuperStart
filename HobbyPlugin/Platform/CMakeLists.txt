@@ -9,19 +9,19 @@ include(${CMAKE_SOURCE_DIR}/HobbyEngine/Config.cmake NO_POLICY_SCOPE)
 # Plugin common info
 include(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake NO_POLICY_SCOPE)
 
-message("build PlatformSDL2 plugin lib!")
+message("build Platform plugin lib!")
 
 # Static library target
-project_configure_static_lib_target(${PLUGIN_PLATFORMSDL2_NAME})
+project_configure_static_lib_target(${PLUGIN_PLATFORM_NAME})
 
 # Project configuration
-project_configure_target(${PLUGIN_PLATFORMSDL2_NAME})
+project_configure_target(${PLUGIN_PLATFORM_NAME})
 
 # Files for the target
-project_configure_files_target(${PLUGIN_PLATFORMSDL2_NAME}
-    ${PLUGIN_PLATFORMSDL2_TARGET_COMMON_FILES}
-    ${PLUGIN_PLATFORMSDL2_TARGET_SRC_FILES}
-    ${PLUGIN_PLATFORMSDL2_TARGET_INC_FILES}
+project_configure_files_target(${PLUGIN_PLATFORM_NAME}
+    ${PLUGIN_PLATFORM_TARGET_COMMON_FILES}
+    ${PLUGIN_PLATFORM_TARGET_SRC_FILES}
+    ${PLUGIN_PLATFORM_TARGET_INC_FILES}
 )
 
 # プラグインが利用するパッケージをvcpkgから取得
@@ -50,7 +50,7 @@ if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${VCPKG_DIR_PATH})
     # SOIL2
     find_package(SOIL2 REQUIRED)
 
-    target_link_libraries(${PLUGIN_PLATFORMSDL2_NAME}
+    target_link_libraries(${PLUGIN_PLATFORM_NAME}
         PRIVATE
         # SDL2関連のライブラリを設定
         $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
@@ -75,20 +75,20 @@ if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${VCPKG_DIR_PATH})
         ${SOIL2_INCLUDE_DIRS}/../lib/soil2.lib
     )
 
-    target_link_libraries(${PLUGIN_PLATFORMSDL2_NAME}
+    target_link_libraries(${PLUGIN_PLATFORM_NAME}
         PUBLIC
             # エンジンのライブラリをリンク
             ${ENGINE_NAME}
     )
 
-    target_include_directories(${PLUGIN_PLATFORMSDL2_NAME}
+    target_include_directories(${PLUGIN_PLATFORM_NAME}
         PRIVATE
             # 絶対パスの中にincludeの文字列が入っているとパス設定がうまくいかない
             # 相対パス設定ならうまくいった
             ./${VCPKG_DIR_PATH}/include/
     )
 
-    target_include_directories(${PLUGIN_PLATFORMSDL2_NAME} PUBLIC ${PLUGIN_PLATFORMSDL2_INC_DIR})
+    target_include_directories(${PLUGIN_PLATFORM_NAME} PUBLIC ${PLUGIN_PLATFORM_INC_DIR})
 else()
     message(STATUS "Non VcpkgDir ${VCPKG_DIR_PATH}")
 endif()

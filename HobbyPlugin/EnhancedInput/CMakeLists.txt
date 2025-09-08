@@ -8,6 +8,9 @@ include(${CMAKE_SOURCE_DIR}/HobbyEngine/Config.cmake NO_POLICY_SCOPE)
 include(${CMAKE_SOURCE_DIR}/HobbyPlugin/Actor/Config.cmake NO_POLICY_SCOPE)
 # Eventモジュール設定
 include(${CMAKE_SOURCE_DIR}/HobbyPlugin/Event/Config.cmake NO_POLICY_SCOPE)
+# Plaformモジュール設定
+include(${CMAKE_SOURCE_DIR}/HobbyPlugin/Platform/Config.cmake NO_POLICY_SCOPE)
+
 # プラグインビルドの共通処理
 include(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake NO_POLICY_SCOPE)
 
@@ -27,11 +30,14 @@ project_configure_files_target(${PLUGIN_ENHANCED_INPUT_NAME}
 )
 
 # 利用するモジュールのインクルードパス
+# モジュールのインクルードパス
 target_include_directories(${PLUGIN_ENHANCED_INPUT_NAME}
     PUBLIC
         ${ENGINE_INC_DIR}
         ${PLUGIN_EVENT_INC_DIR}
         ${PLUGIN_ACTOR_INC_DIR}
+        ${PLUGIN_PLATFORM_INC_DIR}
+        ${PLUGIN_ENHANCED_INPUT_INC_DIR}
 )
 
 # 依存ライブラリのリンク
@@ -40,14 +46,9 @@ target_link_libraries(${PLUGIN_ENHANCED_INPUT_NAME}
         ${ENGINE_NAME}
         ${PLUGIN_EVENT_NAME}
         ${PLUGIN_ACTOR_NAME}
+        ${PLUGIN_PLATFORM_NAME}
 )
 
-
-# プロジェクトが参照できるインクルードディレクトリのパス
-target_include_directories(${PLUGIN_ENHANCED_INPUT_NAME}
-    PUBLIC
-        ${PLUGIN_ENHANCED_INPUT_INC_DIR}
-)
 
 # テスト用サブディレクトリを追加
 add_subdirectory(Test)

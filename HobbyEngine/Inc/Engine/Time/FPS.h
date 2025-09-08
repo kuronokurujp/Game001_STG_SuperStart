@@ -1,13 +1,9 @@
 ﻿#pragma once
 
+#include <functional>
+
 #include "Engine/Core.h"
 #include "Engine/Memory/Memory.h"
-
-// 前方宣言
-namespace Platform
-{
-    class TimeInterface;
-}
 
 /// <summary>
 /// ゲーム中のFPS制御
@@ -19,7 +15,14 @@ namespace Core::Time
         HE_CLASS_DEFAULT_CONSTRUCT_NG(FPS);
 
     public:
-        FPS(Core::Memory::WeakPtr<Platform::TimeInterface>);
+        using NowMSecTimerFunction = std::function<HE::Uint64()>;
+
+    public:
+        /// <summary>
+        /// 現在時間ミリ秒で取得する関数を設定してFPSクラスを作成
+        /// </summary>
+        /// <param name=""></param>
+        FPS(NowMSecTimerFunction);
 
         /// <summary>
         /// 固定フレームモード有効化
@@ -45,7 +48,7 @@ namespace Core::Time
         /// </summary>
         inline HE::Bool IsFixedMode() const { return (this->_uFixedFPS != 0); }
 
-        HE::Bool IsWaitFrameFixedMode(Core::Memory::WeakPtr<Platform::TimeInterface>);
+        HE::Bool IsWaitFrameFixedMode();
 
         /// <summary>
         /// 固定フレームモードでの1フレームのMSec時間
@@ -55,7 +58,7 @@ namespace Core::Time
         /// <summary>
         /// 時間更新
         /// </summary>
-        HE::Bool UpdateTime(Core::Memory::WeakPtr<Platform::TimeInterface> in_wpTimeInterface);
+        HE::Bool UpdateTime();
 
         /// <summary>
         /// 更新時間取得(秒)
@@ -78,5 +81,7 @@ namespace Core::Time
         HE::Uint32 _uCurrentTime                       = 0;
         HE::Uint32 _uFixedFPS                          = 0;
         HE::Uint32 _uFixedFrameMSec                    = 0;
+
+        NowMSecTimerFunction _timerFunction = NULL;
     };
 }  // namespace Core::Time

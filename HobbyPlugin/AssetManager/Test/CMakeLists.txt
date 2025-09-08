@@ -5,7 +5,7 @@ include(${CMAKE_SOURCE_DIR}/HobbyEngine/cmake/VCPkg.cmake NO_POLICY_SCOPE)
 include(${CMAKE_SOURCE_DIR}/HobbyEngine/cmake/Project.cmake NO_POLICY_SCOPE)
 include(${CMAKE_SOURCE_DIR}/HobbyEngine/cmake/Test.cmake NO_POLICY_SCOPE)
 # TODO: 将来DX12など別プラットフォームを利用するケースがあるので分岐する必要がある
-include(${CMAKE_SOURCE_DIR}/HobbyPlugin/PlatformSDL2/Config.cmake NO_POLICY_SCOPE)
+include(${CMAKE_SOURCE_DIR}/HobbyPlugin/Platform/Config.cmake NO_POLICY_SCOPE)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../Config.cmake NO_POLICY_SCOPE)
 include(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake NO_POLICY_SCOPE)
@@ -28,7 +28,7 @@ test_configure_target(
 	${PLUGIN_ASSET_MANAGER_TEST_NAME}
 	${ENGINE_NAME}
 	${PLUGIN_ASSET_MANAGER_NAME}
-	${PLUGIN_PLATFORMSDL2_NAME}
+	${PLUGIN_PLATFORM_NAME}
 )
 
 # POST_BUILD で Resources フォルダをコピー

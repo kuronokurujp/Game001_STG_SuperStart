@@ -1,7 +1,7 @@
 ﻿#include "AssetManager/AssetDataJson.h"
 
 // 依存モジュール
-#include "Engine/Platform/PlatformFile.h"
+#include "Platform/Interface/File.h"
 
 // サードパーティーのjsonライブラリ
 #include "simidjson/simdjson.h"
