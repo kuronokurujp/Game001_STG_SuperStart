@@ -14,21 +14,32 @@ if %errorlevel% neq 0 (
 
 set PROJ_PATH=%1
 if not exist %PROJ_PATH% (
-    echo "not exist proj path %PROJ_PATH%" 
+    echo "not exist proj path %PROJ_PATH%"
     exit /b 1
 )
 
 REM ①chocolateでcmakeをインストール
-choco install cmake --version=3.30.0
+choco upgrade cmake --version=3.27.7 --allow-downgrade -y
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM ②chocolateでvs2022をインストール
 choco install visualstudio2022community
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+rem gitがインストールｓれているかチェック、インストールしているならスキップする
+rem gitがPATHに含まれているかチェック
+where /q git
+if not errorlevel 1 (
+    for /f "delims=" %%V in ('git --version 2^>nul') do set "GIT_VER=%%V"
+    echo [SKIP] Git は既に利用可能です: %GIT_VER%
+    goto SKIP_INST_GIT
+)
+
 REM ③chocolateでgitをインストール
-choco install git --version=2.47.1
+choco install git --version=2.47.1 --allow-downgrade -y
 if %errorlevel% neq 0 exit /b %errorlevel%
+
+:SKIP_INST_GIT
 
 REM chocolateがインストールしたパスを即時反映させる
 call refreshenv
